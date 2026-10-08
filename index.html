@@ -1,45 +1,13 @@
 <!doctype html>
-<html lang="it">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#f7f8fb" />
-  <title>University OS — Study Roadmap</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-  <main class="app-shell">
-    <header class="topbar">
-      <div class="brand"><span class="brand-mark">✦</span><span>University OS</span></div>
-      <div class="top-actions"><button class="icon-button" aria-label="Search">⌕</button><button class="avatar">SB</button></div>
-    </header>
-    <section class="hero">
-      <div><p class="eyebrow">WINTER SESSION · 2026/27</p><h1>Study Roadmap</h1><p class="subtitle">8 Oct 2026 <span>→</span> 20 Dec 2026</p></div>
-      <button id="todayButton" class="secondary-button">Today · 8 Oct</button>
-    </section>
-    <section class="stat-grid" id="summaryStats"></section>
-    <section class="recovery-banner" id="recoveryBanner"></section>
-    <div class="content-grid">
-      <section class="panel calendar-panel">
-        <div class="panel-heading"><div><p class="eyebrow">MISSION CONTROL</p><h2 id="monthTitle">October 2026</h2></div><div class="month-controls"><button id="prevMonth" class="icon-button">‹</button><button id="nextMonth" class="icon-button">›</button></div></div>
-        <div class="calendar-weekdays"><span>Lun</span><span>Mar</span><span>Mer</span><span>Gio</span><span>Ven</span><span>Sab</span><span>Dom</span></div>
-        <div class="calendar-grid" id="calendarGrid"></div>
-        <div class="legend"><span><i class="dot blue"></i>Lezione</span><span><i class="dot green"></i>Studio</span><span><i class="dot red"></i>In ritardo</span><span><i class="dot purple"></i>Checkpoint</span></div>
-      </section>
-      <aside class="side-column">
-        <section class="panel week-panel"><div class="panel-heading"><div><p class="eyebrow">THIS WEEK</p><h2>Panoramica</h2></div><span class="pill">8–11 Ott</span></div><div id="weekOverview"></div></section>
-        <section class="panel exams-panel"><div class="panel-heading"><div><p class="eyebrow">WINTER SESSION</p><h2>Exam readiness</h2></div></div><div id="examList"></div></section>
-      </aside>
-    </div>
-    <section class="content-grid lower-grid">
-      <section class="panel timeline-panel"><div class="panel-heading"><div><p class="eyebrow">CONTINUOUS ROADMAP</p><h2>Timeline</h2></div><div class="filter-row"><button class="filter active">Tutti</button><button class="filter">Studio</button><button class="filter">Lezioni</button></div></div><div class="timeline" id="timeline"></div></section>
-      <aside class="side-column"><section class="panel checkpoint-panel"><div class="panel-heading"><div><p class="eyebrow">31 OCTOBER</p><h2>Checkpoint</h2></div><span class="milestone">🎯</span></div><div id="checkpoints"></div></section><section class="panel goal-panel"><span class="goal-icon">✦</span><div><p class="eyebrow">20 DECEMBER GOAL</p><h3>Ready for January exams.</h3><p>All winter-session materials completed.</p></div></section></aside>
-    </section>
-  </main>
-  <div class="toast" id="toast" role="status"></div>
-  <script src="app.js"></script>
-</body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f5f3ee" />
+    <title>University OS</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
