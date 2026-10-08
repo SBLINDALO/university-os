@@ -1,13 +1,129 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#f5f3ee" />
-    <title>University OS</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#f6f7fb" />
+  <title>University OS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!--
+  THESIS: University OS is a calm daily cockpit, not a scrolling study dashboard.
+  OWN-WORLD: Soft system surfaces, midnight ink, electric blue tint, and sparse glass reserved for the tab bar.
+  STORY: The student sees today's commitments first, then moves deliberately into time, exams, degree, or preferences.
+  FIRST VIEWPORT: One focused screen per tab; Today leads with the date, completion ring, next lesson, and study queue.
+  FORM: Native-inspired five-tab application shell, chosen over a single dense roadmap so critical information stays within one screen.
+  -->
+  <main class="app-shell">
+    <section class="app-view is-active" data-view="today" aria-labelledby="today-title">
+      <header class="screen-header">
+        <div>
+          <p class="date-kicker">GIOVEDÌ 8 OTTOBRE</p>
+          <h1 id="today-title">Buongiorno, Stefano</h1>
+        </div>
+        <button class="round-button" aria-label="Notifiche">•••</button>
+      </header>
+      <div class="today-hero">
+        <div>
+          <p class="section-label">SESSIONE INVERNALE · 2026/27</p>
+          <h2>Un passo alla volta.</h2>
+          <p class="muted">Hai un piano chiaro per oggi.</p>
+        </div>
+        <div class="progress-dial" aria-label="Completamento di oggi 33 percento"><span id="todayProgress">33%</span><small>oggi</small></div>
+      </div>
+      <div class="today-grid">
+        <section class="surface lesson-surface">
+          <div class="section-heading"><div><p class="section-label">PROSSIMA</p><h3>Lezioni di oggi</h3></div><span class="count-badge">3</span></div>
+          <div id="todayLessons" class="lesson-list"></div>
+        </section>
+        <section class="surface task-surface">
+          <div class="section-heading"><div><p class="section-label">PAGINE DA STUDIARE</p><h3>Attività di oggi</h3><p id="todayStudySummary" class="study-summary">Giornata pesante · 55 pagine</p></div><span id="taskCount" class="count-badge">15/55 p</span></div>
+          <div id="todayTasks" class="task-list"></div>
+        </section>
+      </div>
+      <section class="focus-strip">
+        <span class="focus-icon">✦</span>
+        <div><strong>Focus consigliato</strong><p>Chiudi Linguistica prima della pausa pranzo.</p></div>
+        <button class="text-button" data-tab="exams">Vedi</button>
+      </section>
+    </section>
+
+    <section class="app-view" data-view="calendar" aria-labelledby="calendar-title">
+      <header class="screen-header">
+        <div><p class="date-kicker">PIANO TEMPORALE</p><h1 id="calendar-title">Calendario</h1></div>
+        <button id="calendarToday" class="small-button">Oggi</button>
+      </header>
+      <div class="segmented-control" role="tablist" aria-label="Vista calendario">
+        <button class="segment is-selected" data-calendar-view="month" role="tab">Mese</button>
+        <button class="segment" data-calendar-view="week" role="tab">Settimana</button>
+      </div>
+      <div class="calendar-toolbar"><button id="prevMonth" class="round-button" aria-label="Mese precedente">‹</button><h2 id="monthTitle">Ottobre 2026</h2><button id="nextMonth" class="round-button" aria-label="Mese successivo">›</button></div>
+      <div id="calendarContent"></div>
+      <div class="calendar-key"><span><i class="key-dot lesson-dot"></i>Lezioni</span><span><i class="key-dot study-dot"></i>Studio</span><span><i class="key-dot done-dot"></i>Completato</span></div>
+    </section>
+
+    <section class="app-view" data-view="exams" aria-labelledby="exams-title">
+      <header class="screen-header">
+        <div><p class="date-kicker">WINTER SESSION</p><h1 id="exams-title">Esami</h1></div>
+        <button class="round-button" aria-label="Aggiungi esame">＋</button>
+      </header>
+      <section class="exam-overview surface">
+        <div><p class="section-label">READINESS SESSIONE</p><strong id="examOverallPct">0%</strong><p class="muted">Calcolata sulle pagine completate</p></div>
+        <div class="overview-stats"><span><b id="examTotalPages">0</b><small>pagine completate</small></span><span><b id="examTotalCfu">48</b><small>CFU in sessione</small></span></div>
+        <div class="progress"><span id="examOverallProgress" style="width:0%"></span></div>
+      </section>
+      <div class="view-heading"><h2>Il tuo inverno</h2><span>4 esami · progresso da pagine</span></div>
+      <div id="examList" class="exam-list"></div>
+    </section>
+
+    <section class="app-view" data-view="degree" aria-labelledby="degree-title">
+      <header class="screen-header">
+        <div><p class="date-kicker">PERCORSO DI LAUREA</p><h1 id="degree-title">Degree</h1></div>
+        <button class="small-button">Dettagli</button>
+      </header>
+      <section class="degree-hero">
+        <div class="degree-ring"><span>120</span><small>CFU</small></div>
+        <div><p class="section-label">ANCORA DA COMPLETARE</p><h2>Il traguardo è visibile.</h2><p class="muted">180 CFU richiesti · 60 già completati</p></div>
+      </section>
+      <div class="roadmap">
+        <div class="view-heading"><h2>Roadmap</h2><span>66% completato</span></div>
+        <div class="roadmap-line">
+          <div class="roadmap-step is-done"><span>✓</span><div><strong>Esami fondamentali</strong><small>60 CFU completati</small></div></div>
+          <div class="roadmap-step is-current"><span>2</span><div><strong>Sessione invernale</strong><small>4 esami · 68% readiness</small></div></div>
+          <div class="roadmap-step"><span>3</span><div><strong>Tesi</strong><small>Argomento da definire</small></div></div>
+        </div>
+      </div>
+      <section class="thesis-card surface"><span class="thesis-icon">⌁</span><div><p class="section-label">THESIS TRACKER</p><h3>Il prossimo passo è scegliere il tema.</h3><p class="muted">Tieni qui le decisioni importanti del tuo percorso.</p></div><button class="round-button" aria-label="Apri tesi">›</button></section>
+    </section>
+
+    <section class="app-view" data-view="settings" aria-labelledby="settings-title">
+      <header class="screen-header"><div><p class="date-kicker">PERSONALIZZA</p><h1 id="settings-title">Impostazioni</h1></div><div class="profile-avatar">SB</div></header>
+      <div class="settings-group">
+        <p class="section-label">PREFERENZE</p>
+        <button class="settings-row"><span class="row-icon blue-icon">◐</span><span><strong>Vista predefinita</strong><small>Today</small></span><b>›</b></button>
+        <button class="settings-row"><span class="row-icon purple-icon">Aa</span><span><strong>Aspetto</strong><small>Sistema · Automatico</small></span><b>›</b></button>
+        <button class="settings-row"><span class="row-icon green-icon">✓</span><span><strong>Promemoria</strong><small>Attivi</small></span><b>›</b></button>
+      </div>
+      <div class="settings-group">
+        <p class="section-label">DATI</p>
+        <button class="settings-row"><span class="row-icon orange-icon">↗</span><span><strong>Esporta piano</strong><small>CSV o JSON</small></span><b>›</b></button>
+        <button class="settings-row"><span class="row-icon gray-icon">?</span><span><strong>Aiuto</strong><small>Come usare University OS</small></span><b>›</b></button>
+      </div>
+      <p class="settings-footer">University OS · Sessione 2026/27</p>
+    </section>
+  </main>
+  <nav class="tab-bar" aria-label="Navigazione principale">
+    <button class="tab is-active" data-tab="today"><span>⌂</span><small>Today</small></button>
+    <button class="tab" data-tab="calendar"><span>▦</span><small>Calendar</small></button>
+    <button class="tab" data-tab="exams"><span>◒</span><small>Exams</small></button>
+    <button class="tab" data-tab="degree"><span>⌘</span><small>Degree</small></button>
+    <button class="tab" data-tab="settings"><span>⚙</span><small>Settings</small></button>
+  </nav>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
 </html>
